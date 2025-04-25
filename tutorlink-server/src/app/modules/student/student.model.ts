@@ -17,6 +17,7 @@ const studentSchema = new Schema<TStudent>({
   image: { type: String, required: true },
   thana: { type: String, required: true },
   district: { type: String, required: true },
+  role: { type: String, enum: ['student', 'tutor', 'admin'] },
   gender: { type: String, enum: ['male', 'female'] },
   isActive: { type: Boolean, default: true },
 });

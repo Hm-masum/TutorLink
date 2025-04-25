@@ -7,15 +7,9 @@ import { StudentPostRoutes } from '../modules/studentPost/studentPost.route';
 import { TutorPostRoutes } from '../modules/tutorPost/tutorPost.route';
 import { ApplyTutorPostRoutes } from '../modules/applyTutorPost/applyTutorPost.route';
 import { ApplyStudentPostRoutes } from '../modules/applyStudentPost/applyStudentPost.route';
-import { AuthRoutes } from '../modules/auth/auth.route';
-
 const router = Router();
 
 const moduleRoutes = [
-  {
-    path: '/auth',
-    route: AuthRoutes,
-  },
   {
     path: '/users',
     route: UserRoutes,

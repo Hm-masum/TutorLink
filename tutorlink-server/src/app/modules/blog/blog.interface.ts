@@ -6,5 +6,6 @@ export type TBlog = {
   tags: string[];
   isPublished: boolean;
   author?: string;
-  gmail?: string;
+  authorImage?: string;
+  email?: string;
 };

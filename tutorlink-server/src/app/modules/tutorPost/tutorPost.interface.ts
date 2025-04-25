@@ -1,7 +1,7 @@
 import { Types } from 'mongoose';
 
 export type TTutorPost = {
-  tutorId: Types.ObjectId;
+  tutorId?: Types.ObjectId;
   title: string;
   tutoringTime: string;
   numberOfStudent: string;
@@ -9,8 +9,7 @@ export type TTutorPost = {
   daysPerWeek: string;
   thana: string;
   district: string;
-  curriculum: string;
-  studentGender: string;
+  curriculum: 'English' | 'Bangla';
   subject: string;
-  salary: string;
+  salary: number;
 };

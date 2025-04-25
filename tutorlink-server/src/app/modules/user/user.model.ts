@@ -6,6 +6,7 @@ import config from '../../config';
 
 const userSchema = new Schema<TUser, UserModel>(
   {
+    name: { type: String, required: true },
     email: {
       type: String,
       required: true,
@@ -17,6 +18,7 @@ const userSchema = new Schema<TUser, UserModel>(
       },
       unique: true,
     },
+    image: { type: String, required: true },
     password: { type: String, required: true, select: 0 },
     role: { type: String, enum: ['student', 'tutor', 'admin'] },
     isActive: { type: Boolean, default: true },

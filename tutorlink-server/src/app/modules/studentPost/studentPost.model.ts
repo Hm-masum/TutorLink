@@ -5,7 +5,7 @@ const studentPostSchema = new Schema<TStudentPost>(
   {
     studentId: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Student',
       required: true,
     },
     title: {
@@ -24,8 +24,10 @@ const studentPostSchema = new Schema<TStudentPost>(
       type: String,
       required: true,
     },
-    studentGender: {
+    studentGender: { type: String, enum: ['male', 'female'], required: true },
+    teacherGender: {
       type: String,
+      enum: ['male', 'female'],
       required: true,
     },
     district: {
@@ -38,7 +40,8 @@ const studentPostSchema = new Schema<TStudentPost>(
     },
     curriculum: {
       type: String,
-      required: true,
+      enum: ['English', 'Bangla'],
+      default: 'Bangla',
     },
     class: {
       type: String,
@@ -46,11 +49,6 @@ const studentPostSchema = new Schema<TStudentPost>(
     },
     subject: {
       type: String,
-      required: true,
-    },
-    teacherGender: {
-      type: String,
-      enum: ['male', 'female'],
       required: true,
     },
     daysPerWeek: {

@@ -7,19 +7,13 @@ export type TTutor = {
   user: Types.ObjectId;
   password: string;
   gender: 'male' | 'female';
+  role: 'student' | 'tutor' | 'admin';
   email: string;
   phone: string;
   image: string;
   thana: string;
   district: string;
-  tuition?: {
-    duration?: string;
-    fees?: string;
-    level?: string;
-    subject?: string[];
-    curriculum?: string;
-    status?: 'available' | 'unavailable';
-  };
+
   education?: {
     graduationCurriculum?: string;
     graduationInstitute?: string;

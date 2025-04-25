@@ -6,13 +6,13 @@ export type TStudentPost = {
   institute: string;
   tutoringTime: string;
   numberOfStudent: string;
-  studentGender: string;
+  studentGender: 'male' | 'female';
+  teacherGender: 'male' | 'female';
   thana: string;
   district: string;
-  curriculum: string;
+  curriculum: 'English' | 'Bangla';
   class: string;
   subject: string;
-  teacherGender: string;
   daysPerWeek: string;
   salary: string;
 };

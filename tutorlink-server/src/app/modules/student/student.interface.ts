@@ -7,9 +7,10 @@ export type TStudent = {
   user: Types.ObjectId;
   password: string;
   gender: 'male' | 'female';
+  role: 'student' | 'tutor' | 'admin';
   email: string;
   phone: string;
-  image?: string;
+  image: string;
   thana: string;
   district: string;
   isActive?: boolean;

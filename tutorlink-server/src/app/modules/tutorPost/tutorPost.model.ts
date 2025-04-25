@@ -5,7 +5,7 @@ const tutorPostSchema = new Schema<TTutorPost>(
   {
     tutorId: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Tutor',
       required: true,
     },
     title: {
@@ -36,20 +36,18 @@ const tutorPostSchema = new Schema<TTutorPost>(
       type: String,
       required: true,
     },
+
     curriculum: {
       type: String,
-      required: true,
-    },
-    studentGender: {
-      type: String,
-      required: true,
+      enum: ['English', 'Bangla'],
+      default: 'Bangla',
     },
     subject: {
       type: String,
       required: true,
     },
     salary: {
-      type: String,
+      type: Number,
       required: true,
     },
   },

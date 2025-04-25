@@ -4,7 +4,8 @@ import sendResponse from '../../utils/sendResponse';
 import { BlogService } from './blog.service';
 
 const createBlog = catchAsync(async (req, res) => {
-  const result = await BlogService.createBlogIntoDB(req.body);
+  const { id } = req.user;
+  const result = await BlogService.createBlogIntoDB(req.body, id);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -16,6 +17,18 @@ const createBlog = catchAsync(async (req, res) => {
 
 const getAllBlogs = catchAsync(async (req, res) => {
   const result = await BlogService.getAllBlogsFromDB();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Blogs fetched successfully',
+    data: result,
+  });
+});
+
+const getMyBlogs = catchAsync(async (req, res) => {
+  const { email } = req.user;
+  const result = await BlogService.getMyBlogsFromDB(email);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -64,6 +77,7 @@ const deleteBlog = catchAsync(async (req, res) => {
 export const blogController = {
   createBlog,
   getAllBlogs,
+  getMyBlogs,
   getSingleBlog,
   updateBlog,
   deleteBlog,

@@ -4,7 +4,8 @@ import sendResponse from '../../utils/sendResponse';
 import { StudentPostService } from './studentPost.service';
 
 const createStudentPost = catchAsync(async (req, res) => {
-  const result = await StudentPostService.createStudentPostIntoDB(req.body);
+  const { id } = req.user;
+  const result = await StudentPostService.createStudentPostIntoDB(req.body, id);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -28,6 +29,18 @@ const getAllStudentPosts = catchAsync(async (req, res) => {
 const getSingleStudentPost = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await StudentPostService.getSingleStudentPostFromDB(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Student Post fetched successfully',
+    data: result,
+  });
+});
+
+const getMyStudentPosts = catchAsync(async (req, res) => {
+  const { id } = req.user;
+  const result = await StudentPostService.getMyStudentPostsFromDB(id);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -64,6 +77,7 @@ const deleteStudentPost = catchAsync(async (req, res) => {
 export const StudentPostController = {
   createStudentPost,
   getAllStudentPosts,
+  getMyStudentPosts,
   getSingleStudentPost,
   updateStudentPost,
   deleteStudentPost,

@@ -8,8 +8,9 @@ const blogSchema = new Schema<TBlog>(
     description: { type: String, required: true },
     image: { type: String },
     tags: { type: [String] },
-    author: { type: String, default: 'Habibullah Mohammad masum' },
-    gmail: { type: String, default: 'hhmasum88@gmail.com' },
+    author: { type: String, required: true },
+    authorImage: { type: String, required: true },
+    email: { type: String, required: true },
     isPublished: { type: Boolean, default: true },
   },
   {

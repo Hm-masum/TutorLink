@@ -2,14 +2,29 @@ import { TBlog } from './blog.interface';
 import { Blog } from './blog.model';
 import AppError from '../../errors/AppError';
 import httpStatus from 'http-status';
+import { User } from '../user/user.model';
 
-const createBlogIntoDB = async (payload: TBlog) => {
+const createBlogIntoDB = async (payload: TBlog, userId: string) => {
+  const user = await User.findById({ _id: userId });
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, 'User is not found');
+  }
+
+  payload.author = user?.name;
+  payload.email = user?.email;
+  payload.authorImage = user?.image;
+
   const result = await Blog.create(payload);
   return result;
 };
 
 const getAllBlogsFromDB = async () => {
   const result = await Blog.find();
+  return result;
+};
+
+const getMyBlogsFromDB = async (email: string) => {
+  const result = await Blog.find({ email: email });
   return result;
 };
 
@@ -44,6 +59,7 @@ const deleteBlogIntoDB = async (id: string) => {
 export const BlogService = {
   createBlogIntoDB,
   getAllBlogsFromDB,
+  getMyBlogsFromDB,
   getSingleBlogFromDB,
   updateBlogFromDB,
   deleteBlogIntoDB,

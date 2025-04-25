@@ -18,8 +18,9 @@ const ApplyStudentPostSchema = new Schema<TApplyStudentPost>({
     required: true,
   },
   selectStatus: {
-    type: Boolean,
-    default: false,
+    type: String,
+    enum: ['pending', 'yes', 'no'],
+    default: 'pending',
   },
   paymentStatus: {
     type: Boolean,

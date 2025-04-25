@@ -4,8 +4,10 @@ import sendResponse from '../../utils/sendResponse';
 import { ApplyTutorPostService } from './applyTutorPost.service';
 
 const createApplyTutorPost = catchAsync(async (req, res) => {
+  const { email } = req.user;
   const result = await ApplyTutorPostService.createApplyTutorPostIntoDB(
     req.body,
+    email,
   );
 
   sendResponse(res, {
@@ -40,9 +42,9 @@ const getSingleApplyTutorPost = catchAsync(async (req, res) => {
 });
 
 const getApplyTutorPostForTutor = catchAsync(async (req, res) => {
-  const email = req.user.email;
-  const result =
-    await ApplyTutorPostService.getSingleApplyTutorPostFromDB(email);
+  const { email } = req.user;
+  console.log('dv');
+  const result = await ApplyTutorPostService.getApplyTutorPostsForTutor(email);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

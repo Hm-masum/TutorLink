@@ -6,8 +6,11 @@ import { Student } from '../student/student.model';
 import { Tutor } from '../tutor/tutor.model';
 import { TutorPost } from '../tutorPost/tutorPost.model';
 
-const createApplyTutorPostIntoDB = async (payload: TApplyTutorPost) => {
-  const isStudentExist = await Student.findById(payload.studentId);
+const createApplyTutorPostIntoDB = async (
+  payload: TApplyTutorPost,
+  email: string,
+) => {
+  const isStudentExist = await Student.findOne({ email });
   if (!isStudentExist) {
     throw new AppError(httpStatus.NOT_FOUND, 'Student not found');
   }
@@ -22,7 +25,12 @@ const createApplyTutorPostIntoDB = async (payload: TApplyTutorPost) => {
     throw new AppError(httpStatus.NOT_FOUND, 'Tuition not found');
   }
 
-  const result = await ApplyTutorPost.create(payload);
+  const data = {
+    ...payload,
+    studentId: isStudentExist._id,
+  };
+
+  const result = await ApplyTutorPost.create(data);
   return result;
 };
 
@@ -48,6 +56,7 @@ const getApplyTutorPostsForStudent = async (email: string) => {
 };
 
 const getApplyTutorPostsForTutor = async (email: string) => {
+  console.log(email);
   const tutor = await Tutor.findOne({ email });
   if (!tutor) {
     throw new AppError(httpStatus.NOT_FOUND, 'Tutor not found');

@@ -5,5 +5,5 @@ export type TApplyStudentPost = {
   tutorId: Types.ObjectId;
   tuitionId: Types.ObjectId;
   paymentStatus?: boolean;
-  selectStatus?: boolean;
+  selectStatus?: 'pending' | 'yes' | 'no';
 };

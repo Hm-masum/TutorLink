@@ -17,17 +17,9 @@ const tutorSchema = new Schema<TTutor>({
   image: { type: String, required: true },
   thana: { type: String, required: true },
   district: { type: String, required: true },
+  role: { type: String, enum: ['student', 'tutor', 'admin'] },
   gender: { type: String, enum: ['male', 'female'] },
   isActive: { type: Boolean, default: true },
-
-  tuition: {
-    duration: { type: String },
-    fees: { type: String },
-    level: { type: String },
-    subject: { type: [String] },
-    curriculum: { type: String },
-    status: { type: String, enum: ['available', 'unavailable'] },
-  },
 
   education: {
     graduationCurriculum: { type: String },

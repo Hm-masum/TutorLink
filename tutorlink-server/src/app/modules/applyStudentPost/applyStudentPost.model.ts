@@ -14,7 +14,7 @@ const ApplyStudentPostSchema = new Schema<TApplyStudentPost>({
   },
   tuitionId: {
     type: Schema.Types.ObjectId,
-    ref: 'TutorPost',
+    ref: 'StudentPost',
     required: true,
   },
   selectStatus: {

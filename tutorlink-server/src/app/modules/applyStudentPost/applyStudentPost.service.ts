@@ -2,27 +2,35 @@ import AppError from '../../errors/AppError';
 import httpStatus from 'http-status';
 import { Student } from '../student/student.model';
 import { Tutor } from '../tutor/tutor.model';
-import { TutorPost } from '../tutorPost/tutorPost.model';
 import { TApplyStudentPost } from './applyStudentPost.interface';
 import { ApplyStudentPost } from './applyStudentPost.model';
+import { StudentPost } from '../studentPost/studentPost.model';
 
-const createApplyStudentPostIntoDB = async (payload: TApplyStudentPost) => {
+const createApplyStudentPostIntoDB = async (
+  payload: TApplyStudentPost,
+  email: string,
+) => {
   const isStudentExist = await Student.findById(payload.studentId);
   if (!isStudentExist) {
     throw new AppError(httpStatus.NOT_FOUND, 'Student not found');
   }
 
-  const isTutorExist = await Tutor.findById(payload.tutorId);
+  const isTutorExist = await Tutor.findOne({ email });
   if (!isTutorExist) {
     throw new AppError(httpStatus.NOT_FOUND, 'Tutor not found');
   }
 
-  const isTuitionExist = await TutorPost.findById(payload.tuitionId);
+  const isTuitionExist = await StudentPost.findById(payload.tuitionId);
   if (!isTuitionExist) {
     throw new AppError(httpStatus.NOT_FOUND, 'Tuition not found');
   }
 
-  const result = await ApplyStudentPost.create(payload);
+  const data = {
+    ...payload,
+    tutorId: isTutorExist._id,
+  };
+
+  const result = await ApplyStudentPost.create(data);
   return result;
 };
 

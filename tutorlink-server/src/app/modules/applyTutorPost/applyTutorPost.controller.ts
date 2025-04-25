@@ -43,7 +43,6 @@ const getSingleApplyTutorPost = catchAsync(async (req, res) => {
 
 const getApplyTutorPostForTutor = catchAsync(async (req, res) => {
   const { email } = req.user;
-  console.log('dv');
   const result = await ApplyTutorPostService.getApplyTutorPostsForTutor(email);
 
   sendResponse(res, {
@@ -55,9 +54,9 @@ const getApplyTutorPostForTutor = catchAsync(async (req, res) => {
 });
 
 const getApplyTutorPostForStudent = catchAsync(async (req, res) => {
-  const email = req.user.email;
+  const { email } = req.user;
   const result =
-    await ApplyTutorPostService.getSingleApplyTutorPostFromDB(email);
+    await ApplyTutorPostService.getApplyTutorPostsForStudent(email);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

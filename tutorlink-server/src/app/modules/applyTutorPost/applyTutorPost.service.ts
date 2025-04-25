@@ -56,7 +56,6 @@ const getApplyTutorPostsForStudent = async (email: string) => {
 };
 
 const getApplyTutorPostsForTutor = async (email: string) => {
-  console.log(email);
   const tutor = await Tutor.findOne({ email });
   if (!tutor) {
     throw new AppError(httpStatus.NOT_FOUND, 'Tutor not found');

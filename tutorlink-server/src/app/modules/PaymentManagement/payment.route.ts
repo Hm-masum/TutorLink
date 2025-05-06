@@ -26,4 +26,10 @@ router.get(
   PaymentController.getPaymentHistoryForTutor,
 );
 
+router.delete(
+  '/:id',
+  auth(USER_ROLE.tutor, USER_ROLE.student),
+  PaymentController.deletePayment,
+);
+
 export const PaymentRoutes = router;

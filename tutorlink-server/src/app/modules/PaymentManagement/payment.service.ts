@@ -7,6 +7,7 @@ import { ApplyTutorPost } from '../applyTutorPost/applyTutorPost.model';
 import { StudentPost } from '../studentPost/studentPost.model';
 import { Student } from '../student/student.model';
 import { TutorPost } from '../tutorPost/tutorPost.model';
+import { Tutor } from '../tutor/tutor.model';
 
 const createPaymentIntoDB = async (
   payload: { applicationId: string },
@@ -130,18 +131,25 @@ const getAllOrderFromDB = async () => {
   return result;
 };
 
-const getPaymentHistoryForStudent = async (studentId: string) => {
-  const result = await Payment.find({ studentId: studentId })
+const getPaymentHistoryForStudent = async (userId: string) => {
+  const student = await Student.findOne({ user: userId });
+  const result = await Payment.find({ studentId: student?._id })
     .populate('studentId')
     .populate('tutorId');
   return result;
 };
 
-const getPaymentHistoryForTutor = async (tutorId: string) => {
-  const result = await Payment.find({ tutorId: tutorId })
+const getPaymentHistoryForTutor = async (userId: string) => {
+  const tutor = await Tutor.findOne({ user: userId });
+
+  const result = await Payment.find({ tutorId: tutor?._id })
     .populate('studentId')
     .populate('tutorId');
   return result;
+};
+
+const deletePaymentHistory = async (id: string) => {
+  const res = await Payment.findByIdAndDelete(id);
 };
 
 export const PaymentServices = {
@@ -150,4 +158,5 @@ export const PaymentServices = {
   getAllOrderFromDB,
   getPaymentHistoryForStudent,
   getPaymentHistoryForTutor,
+  deletePaymentHistory,
 };

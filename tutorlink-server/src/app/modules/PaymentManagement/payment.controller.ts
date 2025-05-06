@@ -63,10 +63,23 @@ const getPaymentHistoryForStudent = catchAsync(async (req, res) => {
   });
 });
 
+const deletePayment = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  await PaymentServices.deletePaymentHistory(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Payment deleted successfully',
+    data: [],
+  });
+});
+
 export const PaymentController = {
   createPayment,
   getAllPayment,
   verifyPayment,
   getPaymentHistoryForStudent,
   getPaymentHistoryForTutor,
+  deletePayment,
 };

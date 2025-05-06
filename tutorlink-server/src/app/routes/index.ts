@@ -7,6 +7,7 @@ import { StudentPostRoutes } from '../modules/studentPost/studentPost.route';
 import { TutorPostRoutes } from '../modules/tutorPost/tutorPost.route';
 import { ApplyTutorPostRoutes } from '../modules/applyTutorPost/applyTutorPost.route';
 import { ApplyStudentPostRoutes } from '../modules/applyStudentPost/applyStudentPost.route';
+import { PaymentRoutes } from '../modules/PaymentManagement/payment.route';
 const router = Router();
 
 const moduleRoutes = [
@@ -41,6 +42,10 @@ const moduleRoutes = [
   {
     path: '/apply-student-post',
     route: ApplyStudentPostRoutes,
+  },
+  {
+    path: '/payment',
+    route: PaymentRoutes,
   },
 ];
 

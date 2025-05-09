@@ -40,7 +40,7 @@ EduHunt is a full-stack web platform that connects students and tutors. Students
    ```sh
    npm install 
    ```
-5.Run code:
+5. Run code:
    ```sh
    npm run dev 
    ```

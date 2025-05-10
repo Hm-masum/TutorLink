@@ -4,8 +4,8 @@
 - Backend: [EduHunt](https://tutorlink-server-pi.vercel.app/api/v1)
 
 ## Project Overview
-
 EduHunt is a full-stack web platform that connects students and tutors. Students can create posts to find tutors or apply to tutor listings, while tutors can do the same to find students. The platform features role-based authentication, a user-friendly UI/UX, and secure payment integration.
+
 ---
 ### Public Routes
 

@@ -86,6 +86,7 @@ const verifyPayment = async (order_id: string) => {
   const tutorApplication = await ApplyStudentPost.findById(
     paymentApplication?.applicationId,
   );
+
   const studentApplication = await ApplyTutorPost.findById(
     paymentApplication?.applicationId,
   );
@@ -123,6 +124,7 @@ const verifyPayment = async (order_id: string) => {
       },
     );
   }
+
   return verifiedPayment;
 };
 

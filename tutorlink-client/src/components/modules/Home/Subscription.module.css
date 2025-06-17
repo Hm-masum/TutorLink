@@ -1,0 +1,7 @@
+.subscription {
+  background: linear-gradient(45deg, #030107 0%, rgba(7, 2, 17, 0) 100%),
+    url("../../../assets/banner8.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

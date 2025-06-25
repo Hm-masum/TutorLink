@@ -12,7 +12,7 @@ const createApplyTutorPostIntoDB = async (
 ) => {
   const isStudentExist = await Student.findOne({ email });
   if (!isStudentExist) {
-    throw new AppError(httpStatus.NOT_FOUND, 'Student not found');
+    throw new AppError(httpStatus.NOT_FOUND, 'You are not a student!');
   }
 
   const isTutorExist = await Tutor.findById(payload.tutorId);

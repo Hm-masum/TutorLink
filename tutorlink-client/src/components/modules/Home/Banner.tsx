@@ -26,7 +26,7 @@ const Banner = () => {
         <Image
           src={banner}
           alt="image"
-          className="h-[200px] md:h-[475px] w-[100%]"
+          className="h-[200px] md:h-[450px] w-[100%]"
         />
       </div>
     </div>

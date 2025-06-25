@@ -20,7 +20,7 @@ const StudentPostDetails = ({ post }: { post: IStudentPost }) => {
       if (res.success) {
         toast.success("Applied Successfully");
       } else {
-        toast.error("Something is wrong!");
+        toast.error(res.message || "Something went wrong");
       }
     } catch (err: any) {
       toast.error(err?.message);

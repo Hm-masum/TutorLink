@@ -36,7 +36,11 @@ const FeatureStudent = () => {
           </div>
         </div>
         <div className="w-full md:w-[50%]">
-          <Image src={img} className="w-full h-[350px]" alt="img1" />
+          <Image
+            src={img}
+            className="w-full md:h-[370px] h-[250px]"
+            alt="img1"
+          />
         </div>
       </div>
     </div>

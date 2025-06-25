@@ -15,7 +15,11 @@ const FeatureTutor = () => {
 
       <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10">
         <div className="w-full md:w-[50%]">
-          <Image src={img} className="w-full h-[350px]" alt="img1" />
+          <Image
+            src={img}
+            className="w-full md:h-[370px] h-[250px]"
+            alt="img1"
+          />
         </div>
         <div className="space-y-2 w-full md:w-[50%]">
           <h2 className="text-xl md:text-3xl font-semibold text-center md:text-start">

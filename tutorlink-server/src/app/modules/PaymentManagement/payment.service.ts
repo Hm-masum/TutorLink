@@ -65,7 +65,7 @@ const createPaymentIntoDB = async (
   const payment = await orderUtils.makePaymentAsync(shurjopayPayload);
 
   if (payment?.transactionStatus) {
-    await Payment.updateOne({
+    order = await order.updateOne({
       transaction: {
         id: payment.sp_order_id,
         transactionStatus: payment.transactionStatus,

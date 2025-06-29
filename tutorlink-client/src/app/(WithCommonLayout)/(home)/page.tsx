@@ -3,8 +3,9 @@ import FeatureStudent from "@/components/modules/Home/FeatureStudent";
 import FeatureTutor from "@/components/modules/Home/FeatureTutor";
 
 import ServiceCard from "@/components/modules/Home/ServiceCard";
-import Subscription from "@/components/modules/Home/Subscription";
+import ChooseUS from "@/components/modules/Home/ChooseUs";
 import Testimonial from "@/components/modules/Home/Testimonial";
+import GetStarted from "@/components/modules/Home/GetStarted";
 
 const page = () => {
   return (
@@ -13,8 +14,9 @@ const page = () => {
       <ServiceCard />
       <FeatureTutor />
       <FeatureStudent />
+      <GetStarted />
+      <ChooseUS />
       <Testimonial />
-      <Subscription />
     </div>
   );
 };

@@ -32,7 +32,7 @@ const Navbar = () => {
   const { user } = useUser();
 
   return (
-    <header className="px-3 py-2 backdrop-blur-3xl bg-white/55 dark:bg-white/35 sticky top-0 z-10">
+    <div className="px-3 py-2 backdrop-blur-3xl bg-white/55 dark:bg-white/35 sticky top-0 z-10">
       <div className="md:max-w-7xl mx-auto flex items-center justify-between">
         {/* menu bar */}
         <button className="md:w-[25%] lg:hidden p-2 flex items-center justify-end">
@@ -102,25 +102,23 @@ const Navbar = () => {
         </ul>
 
         <div className="md:w-[25%] flex items-center justify-center md:justify-end gap-3 md:gap-5">
-          <div>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon">
-                  <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                  <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                  <span className="sr-only">Toggle theme</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
-                  Light
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
-                  Dark
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="icon">
+                <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                <span className="sr-only">Toggle theme</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => setTheme("light")}>
+                Light
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setTheme("dark")}>
+                Dark
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           {user ? (
             <ProfileDropdown />
@@ -133,7 +131,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
-    </header>
+    </div>
   );
 };
 

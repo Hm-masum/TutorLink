@@ -12,8 +12,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Loading from "@/components/shared/Loader";
+import { useSearchParams } from "next/navigation";
 
 interface OrderData {
   id: number;
@@ -52,21 +53,32 @@ interface OrderData {
 export default function VerifyOrderPage() {
   const [orderData, setOrderData] = useState<OrderData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  const searchParams = useSearchParams();
+  const hasFetchedRef = useRef(false);
 
   useEffect(() => {
     const getData = async () => {
-      const params = new URLSearchParams(window.location.search);
-      const id = params.get("order_id");
+      const orderId = searchParams.get("order_id");
 
-      if (!id) {
+      if (!orderId) {
         setError("No order ID provided");
         setLoading(false);
         return;
       }
+
+      setLoading(true);
+      setError(null);
+      setOrderData(null);
+
       try {
-        const res = await verifyPayment(id);
-        setOrderData(res?.data?.[0]);
+        const res = await verifyPayment(orderId);
+        if (res?.success && res?.data?.[0]) {
+          setOrderData(res.data[0]);
+        } else {
+          setError(res?.message || "Order could not be verified.");
+        }
       } catch (err: any) {
         setError(err.message || "Something went wrong");
       } finally {
@@ -74,8 +86,11 @@ export default function VerifyOrderPage() {
       }
     };
 
-    getData();
-  }, []);
+    if (!hasFetchedRef.current) {
+      hasFetchedRef.current = true;
+      getData();
+    }
+  }, [searchParams]);
 
   if (loading)
     return (

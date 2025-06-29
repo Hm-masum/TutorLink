@@ -18,6 +18,7 @@ import { loginUser } from "@/services/AuthService";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/context/UserContext";
+import { jwtDecode } from "jwt-decode";
 
 const LoginForm = () => {
   const form = useForm();
@@ -25,16 +26,20 @@ const LoginForm = () => {
     formState: { isSubmitting },
   } = form;
   const router = useRouter();
-  const { setIsLoading } = useUser();
+  const { setIsLoading, setUser } = useUser();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       const result = await loginUser(data);
-      setIsLoading(true);
 
       if (result?.success) {
-        toast.success(result?.message);
+        const decodedUser: any = jwtDecode(result?.data?.accessToken);
+        setUser(decodedUser);
+        setIsLoading(false);
         router.push("/");
+        toast.success(result?.message);
+      } else {
+        toast.error("Invalid credentials");
       }
     } catch (err: any) {
       toast.error(err?.message);

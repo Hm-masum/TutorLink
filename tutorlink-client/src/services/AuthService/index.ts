@@ -1,4 +1,5 @@
 "use server";
+
 import { getValidToken } from "@/lib/verifyToken";
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
@@ -44,6 +45,17 @@ export const registerTutor = async (userData: FieldValues) => {
   }
 };
 
+export const getCurrentUser = async () => {
+  const accessToken = (await cookies()).get("accessToken")?.value;
+  let decodedData = null;
+  if (accessToken) {
+    decodedData = await jwtDecode(accessToken);
+    return decodedData;
+  } else {
+    return null;
+  }
+};
+
 export const loginUser = async (userData: FieldValues) => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/users/login`, {
@@ -69,18 +81,6 @@ export const loginUser = async (userData: FieldValues) => {
 
 export const logout = async () => {
   (await cookies()).delete("accessToken");
-};
-
-export const getCurrentUser = async () => {
-  const accessToken = (await cookies()).get("accessToken")?.value;
-  let decodedData = null;
-
-  if (accessToken) {
-    decodedData = await jwtDecode(accessToken);
-    return decodedData;
-  } else {
-    return null;
-  }
 };
 
 export const getNewToken = async () => {

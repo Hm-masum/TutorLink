@@ -19,17 +19,20 @@ import { useUser } from "@/context/UserContext";
 import { usePathname, useRouter } from "next/navigation";
 import { logout } from "@/services/AuthService";
 import { protectedRoutes } from "@/constants";
+import { toast } from "sonner";
 
 export function NavUser() {
   const { isMobile } = useSidebar();
-  const { user, setIsLoading } = useUser();
+  const { user, setIsLoading, setUser } = useUser();
 
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleLogout = () => {
-    logout();
-    setIsLoading(true);
+  const handleLogout = async () => {
+    await logout();
+    setUser(null);
+    setIsLoading(false);
+    toast.success("Logout successfully");
 
     if (protectedRoutes.some((route) => pathname.match(route))) {
       router.push("/");
@@ -46,7 +49,7 @@ export function NavUser() {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage alt={user?.name} />
+                <AvatarImage alt={user?.image} src={user?.image} />
                 <AvatarFallback className="rounded-lg">
                   {user?.role}
                 </AvatarFallback>
@@ -67,7 +70,7 @@ export function NavUser() {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage alt={user?.image} />
+                  <AvatarImage alt={user?.image} src={user?.image} />
                   <AvatarFallback className="rounded-lg">
                     {user?.role}
                   </AvatarFallback>
@@ -79,7 +82,7 @@ export function NavUser() {
               </div>
             </DropdownMenuLabel>
 
-            <DropdownMenuItem onClick={() => handleLogout()}>
+            <DropdownMenuItem onClick={handleLogout}>
               <LogOut />
               Log out
             </DropdownMenuItem>

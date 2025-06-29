@@ -98,14 +98,20 @@ const StudentApplication = ({
     },
     {
       accessorKey: "action",
-      header: "Pay",
+      header: "Payment",
       cell: ({ row }) => (
-        <Button
-          className="bg-purple-700"
-          onClick={() => handlePayment(row.original._id)}
-        >
-          Payment
-        </Button>
+        <div>
+          {row.original?.selectStatus === "yes" ? (
+            <Button
+              className="bg-purple-700"
+              onClick={() => handlePayment(row.original._id)}
+            >
+              Payment
+            </Button>
+          ) : (
+            "Not applicable"
+          )}
+        </div>
       ),
     },
     {
